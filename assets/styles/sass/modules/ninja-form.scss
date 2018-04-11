@@ -1,0 +1,290 @@
+.jBox-content {
+	p {
+		@include font-size(14px);
+		margin: 0;
+		padding: 10px;
+
+		br {
+			display: none;
+		}
+	}
+}
+
+.skinless-ui {
+
+	.save-wrap,
+	.submit-wrap {
+		text-align: center;
+
+		input[type="button"] {
+			color: $white;
+			padding-left: 30px;
+			padding-right: 30px;
+			border: none;
+		}
+	}
+
+	.nf-error-msg {
+		@include font-size(14px);
+	}
+
+	.nf-field {
+		position: relative;
+	}
+
+	.nf-previous-item {
+
+		input[type="button"] {
+			background-color: $steel;
+			color: $red;
+		}
+	}
+
+	.nf-mp-footer {
+		border-top: 1px solid $steel;
+		padding-top: 2.5%;
+	}
+
+	.nf-form-errors {
+		@include font-size(16px, 14px);
+		text-align: center;
+
+		.nf-error-msg {
+			@include font-size(16px, 14px);
+		}
+
+	}
+
+	.nf-input-limit {
+		color: $pebble;
+		text-align: right;
+		margin-bottom: 5px;
+	}
+
+	.nf-field-container {
+
+		&.two-columns {
+
+
+			.nf-field-element {
+
+				li {
+					@include font-size(16px, 14px);
+					float: left;
+					width: 50% !important;
+
+					@include breakpoint(700px) {
+						width: 100% !important;
+						float: none;
+					}
+				}
+			}
+
+		}
+
+		&.single-column {
+
+
+			.nf-field-element {
+
+				li {
+					@include font-size(16px, 14px);
+					float: left;
+					width: 100% !important;
+
+				}
+			}
+
+		}
+	}
+
+	.nf-field-element {
+
+		ol.disclaimer {
+			border-top: 1px solid $steel;
+			padding-top: 40px;
+			margin-bottom: 0;
+			margin-top: 5%;
+
+			li {
+				@include font-size(13px);
+				float: none;
+				list-style-type: upper-roman;
+				color: $pebble;
+				width: 100% !important;
+			}
+		}
+
+		li {
+			@include font-size(16px, 14px);
+			float: left;
+			width: 33% !important;
+
+			@include breakpoint(900px) {
+				width: 50% !important;
+			}
+
+			@include breakpoint(700px) {
+				width: 100% !important;
+				float: none;
+			}
+		}
+	}
+
+	.nf-field-description {
+		@include font-size(14px);
+		font-style: italic;
+		order: 5;
+		display: block;
+		margin-top: 0;
+		margin-bottom: 15px;
+		color: $pebble;
+	}
+
+	.nf-form-content {
+
+		sup {
+			@include font-size($size: 10px, $min: 8px, $max: 14px);
+			bottom: 1ex;
+			height: 0;
+			line-height: 1;
+			position: relative;
+			vertical-align: baseline;
+		}
+
+		h2 {
+			@include font-size(18px);
+			font-weight: 600;
+			margin-top: 4%;
+		}
+	}
+
+	.nf-form-cont {
+		max-width: 926px;
+	}
+
+	.nf-help {
+		cursor: pointer;
+	}
+
+	.nf-multi-cell,
+	.nf-cell {
+		padding: 0 15px !important;
+
+		@include breakpoint(600px) {
+			padding: 0 !important;
+		}
+
+		&:last-of-type {
+			padding-right: 0 !important;
+		}
+
+		&:first-of-type {
+			padding-left: 0 !important;
+		}
+	}
+
+	.nf-mp-body{
+		margin: 2.5% 0;
+	}
+
+	.nf-mp-header {
+		position: relative;
+
+		.nf-breadcrumbs {
+			margin: 0 !important;
+			margin-top: -21px !important;
+			text-align: center;
+
+			li {
+				display: inline-block;
+				float: left;
+				overflow: hidden;
+				width: 16.66666666666667%;
+				height: 20px;
+				border-left: 1px solid $pebble;
+				background-color: transparent;
+
+				a {
+					color: transparent;
+				}
+			}
+		}
+
+		&:before {
+			@include font-size(14px);
+			content: "Start";
+			position: absolute;
+			top: -25px;
+			left: 0;
+		}
+
+		&:after {
+			@include font-size(14px);
+			content: "Finish";
+			position: absolute;
+			top: -25px;
+			right: 0;
+		}
+
+	}
+
+	.nf-saves-cont {
+		display: none;
+	}
+
+	.nf-field-label {
+		label {
+			@include font-size(16px, 14px);
+		}
+	}
+
+	.nf-element {
+		@include font-size(16px, 14px);
+		border: 1px solid $pebble;
+		padding: 5px 10px;
+		color: $smoke;
+
+		&:focus {
+			outline: none;
+			color: $smoke;
+			border-color: $steel;
+		}
+	}
+
+	.nf-form-title {
+
+		h3 {
+			@include font-size(14px);
+			color: $smoke;
+			margin-bottom: 60px;
+		}
+		
+	}
+
+	.nf-mp-header {
+
+		h3 {
+			margin: 5% 0;
+		}
+		
+	}
+
+	.nf-form-fields-required {
+		display: none;
+	}
+
+	.nf-progress-container {
+		background-color: $steel;
+		border-color: $pebble;
+	}
+
+	.nf-progress {
+		background-color: $red;
+	}
+
+}
+
+.application-form-thankyou {
+	margin-top: 5%;
+}

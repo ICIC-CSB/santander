@@ -1,0 +1,62 @@
+{
+    "key": "group_5a5660dd9d1cd",
+    "title": "Introductory Texts",
+    "fields": [
+        {
+            "key": "field_5a5660eb54f5e",
+            "label": "Register",
+            "name": "intro_register",
+            "type": "text",
+            "instructions": "Enter brief introductory text for the register screen.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5a56610754f5f",
+            "label": "Sign In",
+            "name": "intro_signin",
+            "type": "text",
+            "instructions": "Enter brief introductory text for the sign in screen.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "acf-options-application"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1515611236
+}

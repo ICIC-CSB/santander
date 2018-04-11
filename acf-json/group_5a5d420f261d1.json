@@ -1,0 +1,43 @@
+{
+    "key": "group_5a5d420f261d1",
+    "title": "Application Status",
+    "fields": [
+        {
+            "key": "field_5a5d42159bdcf",
+            "label": "Locked",
+            "name": "user_is_locked",
+            "type": "true_false",
+            "instructions": "If this box is checked, it means this user is not allowed to submit the application again. Unchecking this option will allow the user to submit another application.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "Submitted application form?",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "user_role",
+                "operator": "==",
+                "value": "all"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1516064756
+}

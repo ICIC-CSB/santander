@@ -1,0 +1,14 @@
+/**
+ * skinless
+ */
+.skinless-ui {
+	@include minmax(padding, 25%, 25%);
+
+	&.half-padding {
+		@include minmax(padding, 15%, 15%);
+
+		@include breakpoint(650px) {
+			padding-top: 100px;
+		}
+	}
+}

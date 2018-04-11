@@ -1,0 +1,28 @@
+/**
+ * login area
+ */
+.login-area {
+	overflow: hidden;
+}
+
+.login-content {
+	width: percentage(660px / $context);
+	float: left;
+
+	@include breakpoint(990px) {
+		width: 100%;
+		float: none;
+	}
+}
+
+.login-sidebar {
+	float: right;
+	margin-top: 40px;
+	width: percentage(450px / $context);
+
+	@include breakpoint(990px) {
+		width: 100%;
+		float: none;
+	}
+
+}

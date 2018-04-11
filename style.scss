@@ -1,0 +1,1149 @@
+@charset "UTF-8";
+/*
+Theme Name: Santander CSB
+Theme URI: http://thinkargus.com/
+Description: Custom theme for Santander CSB microsite.
+Author: Ben Leece and Scott Poulin for Argus
+Version: 0.5
+*/
+
+// sass --watch --style compact "d:\my documents\web\Wordpress\Santander-CSB\wp-content\themes\Santander-CSB":"d:\my documents\web\Wordpress\Santander-CSB\wp-content\themes\Santander-CSB"
+
+// sass --watch --style compact "d:\my documents\web\Wordpress\Santander-CSB\wp-content\themes\Santander-CSB\style.scss":"d:\my documents\web\Wordpress\Santander-CSB\wp-content\themes\Santander-CSB\style.css" "d:\my documents\web\Wordpress\Santander-CSB\wp-content\themes\Santander-CSB\scss":"d:\my documents\web\Wordpress\Santander-CSB\wp-content\themes\Santander-CSB"
+
+// 
+@import "scss/normalize";
+@import "scss/variables";
+@import "scss/functions";
+
+
+// fonts: uses Google Open Sans
+
+
+// colors
+@each $color, $value in $colors {
+	.bg-#{$color} {
+		background-color: $value !important;
+		
+		// can be overridden of course
+		@if $color == "green" {
+			color: white !important;
+		}
+	}
+	
+	.text-#{$color} {
+		color: $value !important;
+	}
+}
+
+
+
+/* global stuff, in alphabetical order */
+
+body, html {
+	background-color: white;
+}
+
+body, input, select, textarea {
+	font: 400 18px/1.5555 'Open Sans', Arial, Helvetica, sans-serif;
+	color: map-get( $colors, 'gray' );
+}
+
+a {
+	text-decoration: none;
+	color: map-get( $colors, 'red' );
+	@include transition( color, .2s, 0 );
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	
+	&:hover {
+		
+	}
+
+	&:active {
+		background: transparent;
+	}
+	
+	&[href="#to-top"] {
+		display: none;
+		text-align: center;
+		margin: 3em 0 0;
+	}
+	
+	&.opener, &[href="#to-top"] {
+		&:after {
+			content: "";
+			display: inline-block;
+			vertical-align: middle;
+			margin-left: .5em;
+			width: 11px;
+			height: 11px;
+			border-top: 4px solid map-get( $colors, 'red' );
+			border-right: 4px solid map-get( $colors, 'red' );
+			@include add-prefixes( transition, all .4s );
+			@include add-prefixes( transform, rotate( 45deg ) );
+		}
+		
+		&.open:after {
+			@include add-prefixes( transform, rotate( 135deg ) );
+			margin-top: -10px;
+			margin-left: .75em;
+		}
+		
+		&[rel="previous"].open:after, &[href="#to-top"]:after {
+			@include add-prefixes( transform, rotate( -45deg ) );
+			margin-top: 3px;
+		}
+	}
+}
+
+.aligncenter {
+	float: none;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+.alignleft {
+	float: left;
+}
+.alignright {
+	float: right;
+	text-align: right;
+}
+
+b, strong {
+	
+}
+
+big, .big {
+	font-size: 1.25em;
+}
+
+#{$buttons} {
+	cursor: pointer;
+	display: inline-block;
+	height: 2.5em;
+	line-height: 2.5em;
+	color: white;
+	font-weight: bold;
+	font-size: 1em;
+	padding: 0 1.7em;
+	border: none;
+	-webkit-appearance: none;
+    border-radius: 32px;
+	
+	&, &:hover, &:active, &:focus {
+		background: map-get( $colors, 'red' );
+	}
+}
+
+// uses flexbox, assign to parent element
+// at some point move to bootstrap 4 which uses flex for all grid stuff
+.center-both, .center-vertical, .equalized-row {
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+}
+
+.center-both > * {
+	margin: auto;
+}
+
+.center-vertical > * {
+	margin: auto 0;
+}
+
+// use .equalize on parent; .js will add this class if columns have not collapsed
+.equalized-row > * {
+	-webkit-box-flex: 1;
+	-moz-box-flex: 1;
+	-webkit-flex: 1;
+	-ms-flex: 1;
+	flex: 1;
+}
+
+#{$checkboxes} {
+	cursor: pointer;
+}
+
+.clear {
+	clear: both;
+}
+
+.clear:before, .clear:after {
+	content: "";
+	display: block;
+	width: 100%;
+	clear: both;
+}
+
+.container {
+	width: 90%;
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+footer, header {
+	.container {
+		position: relative;
+		@include force-justify();
+		
+		& > * {
+			display: inline-block;
+			margin: 0;
+		}
+	}
+}
+
+footer {
+	@extend .clear;
+	position: relative;
+	background: map-get( $colors, 'gray' );
+	color: map-get( $colors, 'gray-pale' );
+	padding: 5em 0 0;
+	font-size: .75em;
+	
+	a {
+		color: white;
+		
+		&:hover {
+			
+		}
+	}
+	
+	.container {
+		position: static;
+	}
+}
+
+h1, h2, h3 {
+	margin-bottom: .5em;
+}
+h4, h5 {
+	margin-bottom: 1em;
+	
+	& + .opener-group {
+		margin-top: 3em;
+	}
+}
+h6 {
+	margin-bottom: 1.5em;
+}
+h1, h2, h3, h4 {
+	color: map-get( $colors, 'red' );
+}
+
+h1 {
+	line-height: 1.13;
+	font-weight: 700;
+}
+h2, h3 {
+	line-height: 1.218;
+	font-weight: 600;
+}
+h2, h3, h4 {
+	font-weight: 600;
+}
+// h4-h6 retain body line height
+
+
+// sizes - use map to generate sizes for each but also relative span sizes
+$headings : (
+	"h1" : 2.6666em,
+	"h2" : 1.7777em,
+	"h3" : 1.5em,
+	"h4" : 1.3333em,
+	"h5" : 1.2222em,
+	"h6" : 1.1111em
+);
+
+@each $h, $size in $headings {
+	#{$h}, .#{$h} {
+		font-size: $size;
+	}
+	#{$h} {	
+		@each $h-span, $size-span in $headings {
+			@if $h != $h-span {
+				.#{$h-span} {
+					font-size: ($size-span / $size) * 1em;
+				}
+			}
+		}
+	}
+}
+
+hr {
+	border: none;
+	height: 0px;
+	overflow: hidden;
+	border-bottom: 1px solid map-get( $colors, 'gray-light' );
+	clear: both;
+	margin: 1.5em 0;
+}
+
+// desktop
+header {	
+	position: fixed;
+	overflow: hidden;
+	z-index: 100;
+	height: 66px;
+	line-height: 66px;
+	width: 100%;
+	left: 0;
+	top: 1.7777em;
+	background: map-get( $colors, 'red' );
+	
+	a {
+		color: white;
+	}
+	
+	a[href="#mobile-menu"] {
+		display: none;
+		position: relative;
+		@include sprite();
+		width: 32px;
+		height: 24px;
+		border-top: 4px solid white;
+		border-bottom: 4px solid white;
+		vertical-align: -4px;
+		
+		&:after {
+			content: " ";
+			height: 0;
+			width: 100%;
+			position: absolute;
+			left: 0;
+			top: 50%;
+			margin-top: -2px;
+			border-bottom: 4px solid white;
+		}
+	}
+	
+	h3 {
+		color: white;
+		font-weight: 700;
+	}
+	
+	.logo {
+		vertical-align: -3px;
+	}
+	
+	nav {	
+		a[href="#close"] {
+			display: none;
+		}
+		
+		& > ul {
+			& > li {
+				font-size: .8888em;
+			}
+		}
+	}
+}
+
+.hidden {
+	display: none;
+}
+
+.inline {
+	display: inline !important;
+}
+
+#{$inputs}, textarea {
+	color: #000;
+	-webkit-appearance: none;
+    @include transition( color, .2s, 0 );
+	@include add-prefixes( 'box-sizing', 'border-box' );
+	
+	&:active, &:focus, &.valid {
+		color: #000;
+		outline: none;
+	}
+	
+	&.error {
+		background-color: #FFEFEA;
+		border-color: #FF9184;
+	}
+}
+
+.logo {
+	display: block;
+	width: 137px;
+	height: 29px;
+}
+
+// typically page content is here
+main {
+	@extend .clear;
+	position: relative;
+	min-height: 200px;
+	padding: 2.5em 0;
+	
+	img {
+		max-width: 100%;
+		height: auto;
+	}
+	
+	ol {
+		@extend ol.standard;
+	}
+	ul {
+		@extend ul.standard;
+	}
+}
+
+.modal {
+	display: block;
+	width: 80%;
+	max-width: 1200px;
+	height: auto;
+	max-height: 80%;
+	display: none;
+	position: fixed;
+	@include add-prefixes( transform, translate3d(0,0,0) );
+	z-index: 1001;
+	left: 10%;
+	top: 20px;
+	background: #fff;
+	
+	.close {
+		@include sprite();
+		position: absolute;
+		display: block;
+		width: 40px;
+		height: 40px;
+		right: 10px;
+		top: 10px;
+		z-index: 100;
+		@include add-prefixes( transform, rotateZ(45deg) );
+		
+		&:before, &:after {
+			content: "";
+			position: absolute;
+			@include add-prefixes( transition, all .3s );
+		}
+		&:before {
+			top: 0;
+			left: 50%;
+			margin-left: -5px;
+			width: 0;
+			height: 100%;
+			border-left: 10px solid map-get( $colors, 'gray-light' );
+		}
+		&:after {
+			left: 0;
+			top: 50%;
+			margin-top: -5px;
+			height: 0;
+			width: 100%;
+			border-top: 10px solid map-get( $colors, 'gray-light' );
+		}
+		
+		&:hover {
+			&:before, &:after {
+				border-color: map-get( $colors, 'red' );
+			}
+		}
+	}
+	
+	& > div {
+		margin: 3.5em 3em 3em;
+		height: calc( 80vh - 6.5em );
+		overflow: auto;
+		
+		&::-webkit-scrollbar {
+		  -webkit-appearance: none;
+		  width: 7px;
+		  background-color: rgba(0,0,0, .3);
+		}
+		&::-webkit-scrollbar-thumb {
+		  border: 1px solid rgba(0, 0, 0, .2);
+		  border-radius: 4px;
+		  background-color: rgba(255, 255, 255, .5);
+		  -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, .5);
+		}
+	}
+	
+	img {
+		max-width: 100%;
+		height: auto;
+	}
+	
+	ul {
+		@extend ul.standard;
+	}
+}
+
+// used in both header and .pre-footer
+nav {		
+	& > ul {
+		& > li {
+			position: relative;
+			display: inline-block;
+			white-space: nowrap;
+			margin: 0 1em;
+			
+			&.current-menu-item, &.current_page_item, &.current-menu-ancestor {
+				font-weight: 700;
+			}
+			
+			a {
+				color: white;
+			}
+		}
+	}
+}
+
+ol.standard, ul.standard {
+	padding-left: 40px;
+	margin: 0 0 1em;
+	
+	li {
+		margin-bottom: .5em;
+	}
+}
+
+ol.standard {
+	li {
+		list-style: outside decimal;
+	}
+}
+
+ul.standard {
+	li {
+		list-style: outside disc;
+	}
+}
+
+.opener-group {
+	& > a {
+		position: relative;
+		display: block;
+		background: map-get( $colors, 'gray-medium' );
+		color: white;
+		font-size: .8888em;
+		padding: .75em 3.5em .75em 1.5em;
+		margin-bottom: 1px;
+		border-radius: 3px;
+		@include add-prefixes( transition, background-color .3s );
+		
+		&:after {
+			content: "";
+			display: block;
+			position: absolute;
+			top: 50%;
+			margin-top: -8px;
+			right: 1.5em;
+			border-top-color: white;
+			border-right-color: white;
+		}		
+		
+		&:hover {
+			background-color: map-get( $colors, 'gray' );
+		}
+	}
+	
+	& > div.hidden {
+		padding: 2em 5em;
+		
+		p {
+			margin-bottom: 1em;
+		}
+	}
+}
+
+.overlay {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	z-index: 1000;
+	left: 0px;
+	top: 0px;
+	background: #000;
+	@include opacity( .8 );
+	display: none;
+	zoom: 1;
+}
+
+p {
+	margin: 0 0 1.5em;
+}
+
+.pre-footer {
+	padding: 0;
+	height: 48px;
+	line-height: 48px;
+	text-align: center;
+	
+	nav {		
+		& > ul {
+			& > li {
+				font-size: .8333em;
+			}
+		}
+	}
+}
+
+// set element proportions - typically for video/images
+.ratio {
+	position: relative;
+	height: 0;
+	width: 100%;
+	padding: 0;
+	overflow: hidden;
+	//display: inline-block;
+	
+	& > *, .touch-helper, .double-touch {
+		position: absolute !important;
+		left: 0;
+		width: 100%;
+		top: 0;
+	}
+	
+	img, iframe, video {
+		position: absolute;
+		left: 0;
+		width: 100%;
+		top: 0;
+	}
+	
+	iframe, video, .touch-helper, .double-touch {
+		height: 100%;
+	}
+	
+	&.ratio-16-7 {
+		padding-bottom: 43.75%;
+	}
+	&.ratio-16-8 {
+		padding-bottom: 50%;
+	}
+	&.ratio-16-9 {
+		padding-bottom: 56.25%;
+	}
+	&.ratio-16-10 {
+		padding-bottom: 62.5%;
+	}
+	&.ratio-16-11 {
+		padding-bottom: 68.75%;
+	}
+	&.ratio-16-12 {
+		padding-bottom: 75%;
+	}
+	&.ratio-9-16 {
+		padding-bottom: 177.77%;
+	}
+	&.ratio-12-16 {
+		padding-bottom: 133.33%;
+	}
+}
+
+small, .small {
+	font-size: .8888em;
+}
+
+.smaller {
+	font-size: .7em;
+}
+
+.text-center {
+	text-align: center;
+}
+.text-justify {
+	text-align: justify;
+}
+.text-left {
+	text-align: left;
+}
+.text-right {
+	text-align: right;
+}
+
+// text weights
+@each $weight in 300, 400, 700 {
+	.text-weight-#{$weight} {
+		font-weight: $weight;
+	}
+}
+
+#tinymce {
+	padding: 10px;
+	
+	ol {
+		@extend ol.standard;
+	}
+	ul {
+		@extend ul.standard;
+	}
+	
+	.transition {
+		&.enlarge, &.reduce {
+			@include add-prefixes( transform, scale(1, 1) );
+		}
+		
+		&.margin-bottom, &.margin-top {
+			margin-top: inherit;
+		}
+		
+		&.move-left, &.move-right {
+			@include add-prefixes( transform, translateX(0) );
+		}
+		&.move-up, &.move-down {
+			@include add-prefixes( transform, translateY(0) );
+		}		
+		
+		&.opacity {
+			@include opacity( 1 );
+		}
+	}
+}
+
+// interaction helper for iframes etc. on touch devices
+.touch-helper {
+	position: relative;
+	cursor: pointer;	// iOS bug
+	
+	& > * {
+		pointer-events: none;
+		cursor: pointer;	// iOS bug
+	}
+	
+	& > span.touch-blocker {
+		pointer-events: all;
+		position: absolute;
+		z-index: 3;
+		display: block;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		@include opacity( 0 );
+	}
+}
+
+// container class for various transitions triggered by scrolling
+.transition {
+	@include transition( all, 1s, .3s );
+	
+	&.disappear {
+		//@include add-prefixes( transform, scale(1, 1) );
+		height: inherit;
+		margin: inherit;
+		padding: inherit;
+		
+		&.complete {
+			//@include add-prefixes( transform, scale(0, 0) );
+			height: 0 !important;
+			min-height: 0 !important;
+			margin-top: 0 !important;
+			margin-bottom: 0 !important;
+			padding-top: 0 !important;
+			padding-bottom: 0 !important;
+		}
+	}
+	
+	&.enlarge {
+		@include add-prefixes( transform, scale(0, 0) );
+		
+		&.complete {
+			@include add-prefixes( transform, scale(1, 1) );
+		}
+	}
+	
+	&.margin-bottom {
+		margin-bottom: 30%;
+		
+		&.complete {
+			margin-bottom: inherit;
+		}
+	}
+	
+	&.margin-top {
+		margin-top: 30%;
+		
+		&.complete {
+			margin-top: inherit;
+		}
+	}
+	
+	&.move-left {
+		@include add-prefixes( transform, translateX(100%) );
+		
+		&.complete {
+			@include add-prefixes( transform, translateX(0) );
+		}
+	}
+	&.move-right {
+		@include add-prefixes( transform, translateX(-100%) );
+		
+		&.complete {
+			@include add-prefixes( transform, translateX(0) );
+		}
+	}
+	&.move-up {
+		@include add-prefixes( transform, translateY(-1em) );
+		
+		&.complete {
+			@include add-prefixes( transform, translateY(0) );
+		}
+	}
+	&.move-down {
+		@include add-prefixes( transform, translateY(1em) );
+		
+		&.complete {
+			@include add-prefixes( transform, translateY(0) );
+		}
+	}
+	
+	
+	&.opacity {
+		@include opacity( 0 );
+		
+		&.complete {
+			@include opacity( 1 );
+		}
+	}
+	
+	&.reduce {
+		@include add-prefixes( transform, scale(1.5, 1.5) );
+		
+		&.complete {
+			@include add-prefixes( transform, scale(1, 1) );
+		}
+	}
+}
+
+
+// specific pages / sections
+
+.archive {
+	
+}
+
+.hero {
+	min-height: 43vw;
+	max-height: 100vh;
+	padding: calc( 66px + 7em ) 0 7em;
+	display: flex;
+	
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: right center;
+	background-attachment: fixed;
+	
+	
+	&, * {
+		color: white;
+		text-shadow: 0px 0px 100px rgba(0,0,0,.5), 0px 0px 20px rgba(0,0,0,.2);
+	}
+	
+	&.right {
+		background-position: left center;
+		text-align: right;
+	}
+	
+	#{$buttons} {
+		color: map-get( $colors, 'red' );
+		text-shadow: none;
+		
+		&, &:hover, &:active, &:focus {
+			background: white;
+		}
+	}
+	
+	.container {
+		margin: auto;
+	}
+	
+	.hero-content {
+		max-width: 55%;
+		padding: 70px 80px calc( 70px - 1em );
+		position: relative;
+		text-align: left;
+		display: inline-block;
+		margin: auto;
+		
+		figure {
+			position: absolute;
+			height: 70px;
+			width: 100%;
+			left: 0;
+			
+			&:before, &:after {
+				content: "";
+				position: absolute;
+				width: 70px;
+				height: 70px;
+				top: 0;
+			}
+			
+			&:before {
+				border-left: 12px solid map-get( $colors, 'red' );
+				left: 0;
+			}
+			&:after {
+				border-right: 12px solid map-get( $colors, 'red' );
+				right: 0;
+			}
+			
+			&:first-child {
+				top: 0;
+				
+				&:before, &:after {
+					border-top: 12px solid map-get( $colors, 'red' );
+				}
+			}
+			
+			&:last-child {
+				bottom: 0;
+				
+				&:before, &:after {
+					border-bottom: 12px solid map-get( $colors, 'red' );
+				}
+			}
+		}
+		
+		h4 {
+			font-weight: 400;
+			width: 70%;
+			margin-bottom: 1.5em;
+		}
+	}
+}
+
+.home {
+	.hero {
+		max-height: none;
+		
+		h1 {
+			font-size: 3em;
+		}
+		
+		.hero-content {
+			max-width: 70%;
+		}
+	}
+}
+
+
+.partner-list {
+	margin-top: 1em;
+	
+	& > div {
+		margin-bottom: 4em;
+		
+		figure {
+			width: 260px;
+			padding-right: 35px;
+			float: left;
+			margin-top: .8em;
+			text-align: center;
+		}
+		
+		.partner-info {
+			float: left;
+			width: calc( 100% - 260px );
+		}
+	}
+	
+}
+
+
+.tab-group {
+	position: relative;
+	width: 100%;
+	
+	ul, li {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+	
+	.tabs {
+		@include force-justify();
+		
+		li {
+			display: inline-block;
+			width: 180px;
+			
+			&.active a, & > a:hover {
+				@include add-prefixes( filter, none );
+			}
+			
+			&.active {
+				a {
+					cursor: default;
+					
+					&:after {
+						opacity: 1;
+					}
+					
+					&:hover div {
+						@include add-prefixes( transform, none );
+					}
+				}
+			}
+			
+			& > a {
+				position: relative;
+				display: block;
+				text-align: center;
+				@include add-prefixes( filter, grayscale(100%) brightness(290%) );
+				@include add-prefixes( transition, filter .3s );
+				
+				&:after {
+					content: "";
+					display: block;
+					width: 20px;
+					height: 20px;
+					background: white;
+					border-left: 4px solid map-get( $colors, 'red' );
+					border-top: 4px solid map-get( $colors, 'red' );
+					@include add-prefixes( transform, rotate( 45deg ) );
+					position: absolute;
+					z-index: 30;
+					top: 100%;
+					left: 50%;
+					margin: 25px 0 0 -14px;
+					opacity: 0;
+					@include add-prefixes( transition, opacity .2s );
+				}
+				
+				&:hover div {
+					@include add-prefixes( transform, scale(1.05, 1.05) );
+				}
+				
+				div {
+					line-height: 1.3;
+					@include add-prefixes( transition, transform .3s );
+				}
+				
+				img {
+					height: auto;
+				}
+			}
+		}
+	}
+	
+	.tab-content {
+		position: relative;
+		margin-top: 7px;
+		
+		li {
+			position: absolute;
+			z-index: 0;
+			top: 0;
+			left: 0;
+			padding: 4em 0 3em;
+			border-top: 4px solid map-get( $colors, 'red' );
+			opacity: 0;
+			@include add-prefixes( transition, opacity .5s );
+			text-align: left;
+			
+			// acts as placeholder; all will be equally sized
+			&:first-child {
+				position: relative;
+			}
+			
+			&.active {
+				opacity: 1;
+				z-index: 20;
+			}
+			
+			figure {
+				max-width: 405px;
+				height: auto;
+				width: auto;
+				float: left;
+				margin-right: 2em;
+			}
+		}
+	}
+	
+	ul {
+		width: 100%;
+	}
+}
+
+
+.tax-participant-year {
+	main, .modal {
+		a {
+			color: map-get( $colors, 'gray' );
+			
+			&:hover {
+				color: map-get( $colors, 'red' );
+			}
+		}
+		
+		h4 {
+			line-height: 1.2;
+			margin-bottom: 0;
+			color: map-get( $colors, 'gray' );
+		}
+	}
+	
+	.modal > div {
+		@include force-justify();
+		
+		figure, .participant-info {
+			display: inline-block;
+			vertical-align: top;
+		}
+		
+		figure {
+			width: 330px;
+		}
+		
+		.participant-info {
+			width: calc( 100% - 370px );
+		}
+	}
+	
+	.participants {
+		text-align: center;
+		margin: 0 -1.25%;
+		
+		article {
+			display: inline-block;
+			vertical-align: top;
+			width: 22.5%;
+			margin: 0 calc( 1.25% - .125em ) 1em;
+			//margin-bottom: 1em;
+			
+			figure {
+				margin-bottom: .25em;
+			}
+			
+			.participant-bio {
+				display: none;
+			}
+		}
+	}
+	
+	.participant-info {
+		text-align: left;
+	}
+	
+	.participant-years {
+		padding: 0;
+		margin-bottom: 5em;
+		
+		li {
+			list-style: none;
+			display: inline;
+			margin-right: 2em;
+			font-size: 1.3333em;
+			font-weight: 600;
+			
+			&.current-cat a {
+				color: map-get( $colors, 'red' );
+			}
+		}
+	}
+}
+
+
+@import "scss/responsive";
+
+@import "scss/browsers";

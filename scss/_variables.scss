@@ -1,0 +1,17 @@
+$buttons: "button, .button, .checkout-button, input[type=button], input[type=submit], input[type=reset]";
+$inputs: "input[type=date], input[type=datetime], input[type=datetime-local], input[type=email], input[type=month], input[type=number], input[type=password], input[type=tel], input[type=text], input[type=time], input[type=url], input[type=week], select";
+
+$checkboxes: "input[type=radio], input[type=checkbox]";
+
+$background-size: 600px;
+
+// colors
+$colors: (
+	"gray-dark" : #333,
+	"gray" : #575757,
+	"gray-medium" : #6d6d6d,
+	"gray-light" : #999,
+	"gray-pale" : #d6d6d6,
+	"red" : #ec0000
+);
+

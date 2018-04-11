@@ -1,0 +1,31 @@
+/**
+ * global context
+ */
+$context: 1200px;
+
+/**
+ * colors
+ */
+$black: #000000;
+$white: #ffffff;
+$red: #ec0000;
+$slate: #333;
+$gray: rgba(214,214,214,0.2);
+$smoke: rgba(51,51,51,0.82);
+$steel: #D6D6D6;
+$pebble: #999;
+$metal: #D8D8D8;
+
+/*
+font families
+ */
+$helvetica: Helvetica, Arial, sans-serif;
+
+/**
+ * viewports
+ */
+$viewport_ultrawide: 1600px;
+$viewport_desktop: 1200px;
+$viewport_tablet: 800px;
+$viewport_phablet: 600px;
+$viewport_mobile: 500px;

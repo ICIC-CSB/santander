@@ -1,0 +1,195 @@
+/**
+ * authenticator
+ */
+.profile-data-block {
+	border: 1px solid $steel;
+	margin-bottom: 40px;
+	padding: 30px;
+	overflow: hidden;
+
+	&.two-factor-authentication {
+		padding: 0;
+		border: none;
+
+		#tfa_advanced_box,
+		h2 {
+			display: none;
+		}
+
+		.simbatfa-frontend-current-otp {
+			margin-bottom: 20px;
+			display: block !important;
+		}
+
+		.inside {
+
+			p {
+				display: none;
+			}
+
+			h3 {
+				display: none;
+
+				& + p {
+					display: none;
+				}
+			}
+		}
+
+		.two-factor-notice {
+			border: 1px dotted $steel;
+			padding: 20px;
+			margin-bottom: 20px;
+
+			@include breakpoint(600px) {
+				padding: 20px 0;
+				border: none;
+				border-top: 1px dotted $steel;
+				border-bottom: 1px dotted $steel;
+			}
+		}
+
+		h6 {
+			font-weight: 600;
+			margin-bottom: 20px;
+		}
+
+		h3 {
+			margin-bottom: 20px;
+		}
+
+		.tfa_enable_radio_label {
+			display: inline;
+		}
+
+		.two-factor-authentication-wrap {
+			border: 1px solid $steel;
+			padding: 30px;
+		}
+
+		.button-primary {
+			position: static;
+		}
+
+		.simba_tfa_verify_tfa_notice.simba_tfa_intro_notice,
+		.simba_tfa_personal_settings_notice.simba_tfa_intro_notice {
+			display: none;
+		}
+
+	}
+
+	input[type="password"],
+	input[type="text"] {
+		@include font-size(16px, 14px);
+		color: $pebble;
+		padding: 10px;
+		margin-top: 5px;
+		border: 1px solid #999999;
+		background-color: #FFFFFF;
+		display: block;
+		max-width: 440px;
+		width: 100%;
+	}
+
+	.tml-submit-wrap {
+		display: none;
+	}
+
+	&.active {
+
+		.tml-submit-wrap {
+			display: block;
+		}
+
+		.profile-data-preview {
+			display: none;
+		}
+
+		.profile-data-edit {
+			display: block;
+		}
+	}
+
+	.profile-data-preview {
+		display: block;
+		overflow: hidden;
+		position: relative;
+	}
+
+	button, button:hover, button:active, button:focus, .button, .button:hover, .button:active, .button:focus, .checkout-button, .checkout-button:hover, .checkout-button:active, .checkout-button:focus, input[type=button], input[type=button]:hover, input[type=button]:active, input[type=button]:focus, input[type=submit], input[type=submit]:hover, input[type=submit]:active, input[type=submit]:focus, input[type=reset], input[type=reset]:hover, input[type=reset]:active, input[type=reset]:focus {
+		background-color: $steel !important;
+		color: $red !important;
+	}
+
+	.button {
+		position: absolute;
+		right: 0;
+		top: 50%;
+		margin-top: -22.5px;
+		color: $red;
+		background-color: $steel;
+
+		@include breakpoint(700px) {
+			position: static;
+		}
+	}
+
+	.input-wrap {
+		margin-bottom: 20px;
+
+		&:last-of-type {
+			margin-bottom: 0;
+		}
+	}
+
+	label {
+		@include font-size(16px, 14px);
+		display: block;
+	}
+
+	.profile-data-info {
+		float: left;
+		width: 50%;
+
+		@include breakpoint(700px) {
+			float: none;
+			width: 100%;
+			margin-bottom: 20px;
+		}
+
+		&:last-of-type {
+			@include breakpoint(700px) {
+				margin-bottom: 0;
+			}
+		}
+
+		p {
+			margin: 0;
+			margin-bottom: 5px;
+		}
+	}
+
+	.profile-data-edit {
+		display: none;
+		overflow: hidden;
+	}
+}
+
+.tml-profile {
+
+	h3 {
+		margin-bottom: 5%;
+	}
+
+	.error {
+		color: $red;
+	}
+
+	&.active {
+
+		.tml-submit-wrap {
+			display: block;
+		}
+
+	}
+}

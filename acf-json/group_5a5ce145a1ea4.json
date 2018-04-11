@@ -1,0 +1,62 @@
+{
+    "key": "group_5a5ce145a1ea4",
+    "title": "Application Form",
+    "fields": [
+        {
+            "key": "field_5a5ce14b70e50",
+            "label": "Select Application Form",
+            "name": "application_form",
+            "type": "text",
+            "instructions": "Enter the ID of the Ninja Form you intend to use as the application.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5a5f7f9513ae0",
+            "label": "Thank You Message",
+            "name": "thank_you_message",
+            "type": "textarea",
+            "instructions": "Enter the language that should appear when an application is submitted.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "acf-options-options"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1516208055
+}
