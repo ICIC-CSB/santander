@@ -1,0 +1,545 @@
+// media queries: desktop down
+
+@import "variables";
+
+@media (max-width: 1400px) {
+	.tax-participant-year {
+		.modal > div {
+			figure {
+				width: 260px;
+			}
+			
+			.participant-info {
+				width: calc( 100% - 300px );
+			}
+		}
+	}
+}
+
+@media (max-width: 1200px) {
+	body main, input, select, textarea, .hero .button, .modal {
+		font-size: 16px;
+	}
+	
+	header {
+		h3 {
+			font-size: 1.1111em;
+		}
+		
+		nav {		
+			& > ul {
+				& > li {
+					margin: 0 .7em;
+				}
+			}
+		}
+	}
+	
+	// start sizing based on view w/h
+	.hero {
+		padding: calc( 66px + 5vw ) 0 5vw;
+		
+		.hero-content {
+			padding: 5.8vw 6.6666vw calc( 5.8vw - 1em );
+			
+			figure {
+				height: 5.8vw;
+				
+				&:before, &:after {
+					width: 5.8vw;
+					height: 5.8vw;
+				}
+				
+				&:before {
+					border-left-width: 1vw;
+				}
+				&:after {
+					border-right-width: 1vw;
+				}
+				
+				&:first-child {
+					&:before, &:after {
+						border-top-width: 1vw;
+					}
+				}
+				
+				&:last-child {
+					&:before, &:after {
+						border-bottom-width: 1vw;
+					}
+				}
+			}
+			
+			h1 {
+				font-size: 4vw;
+			}
+			
+			h4 {
+				font-size: 2vw;
+				width: 100%;
+			}
+		}
+	}
+	
+	.partner-list {
+		& > div {
+			figure {
+				width: 220px;
+			}
+			
+			.partner-info {
+				width: calc( 100% - 220px );
+			}
+		}
+		
+	}
+	
+	// adjust active ^ due to body font-size change
+	.tab-group {
+		.tabs li {
+			& > a {
+				&:after {
+					margin-top: 22px;
+				}
+			}
+		}
+	}
+}
+
+// tablets
+@media (max-width: 1100px) {
+	header {
+		top: 0;
+	}
+	
+	.modal {
+		width: auto;
+		max-height: none;
+		left: 2em;
+		right: 2em;
+		top: 2em;
+		bottom: 2em;
+		
+		& > div {
+			height: calc( 100vh - 10.5em );
+		}
+	}
+	
+	// unfix hero BG so it scales properly
+	.hero {
+		background-attachment: local;
+	}
+	
+	// preserve 5 across layout
+	.tab-group {
+		.tabs li {
+			width: 160px;
+		}
+		
+		.tab-content li {
+			padding: 3em 0 2em;
+		}
+	}
+	
+	.tax-participant-year {
+		.modal > div {
+			figure {
+				width: 230px;
+			}
+			
+			.participant-info {
+				width: calc( 100% - 270px );
+			}
+		}
+	}
+}
+
+// mobile menu
+@media (max-width: 1020px) {
+	a[href="#to-top"] {
+		display: block;
+	}
+	
+	footer {
+		padding-top: 6em;
+		background: map-get( $colors, 'red' );
+		color: black;
+		
+		.container > * {
+			display: block;
+			text-align: center;
+		}
+		
+		nav {
+			background: map-get( $colors, 'gray' );
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			padding: 1em;
+			
+			li {
+				a {
+					display: block;
+					padding: .5em;
+				}
+			}
+		}
+	}
+
+	header {
+		// overflow: visible;
+		
+		a[href="#mobile-menu"] {
+			display: inline-block;
+		}
+		
+		// mobile nav
+		nav {
+			position: fixed;
+			z-index: 50;
+			right: 100%;
+			top: 0;
+			bottom: 0;
+			width: 100%;
+			@include add-prefixes( transition, right .3s );
+			
+			&.open {
+				right: 0;
+			}
+			
+			a[href="#close"] {
+				display: block;
+				position: absolute;
+				//z-index: 51;
+				left: 0;
+				top: 0;
+				width: calc( 5% + 66px );
+				height: 66px;
+				line-height: 63px;
+				font-size: 30px;
+				font-weight: bold;
+				text-align: center;
+				background: map-get( $colors, 'gray-dark' );
+			}
+			
+			.main {
+				background: map-get( $colors, 'gray-dark' );
+				position: absolute;
+				top: 65px;
+				left: 0;
+				bottom: 0;
+				width: 100%;
+				padding: 2em 3em;
+				overflow: auto;
+			}
+	
+			
+			
+			& > ul {
+				& > li {
+					display: block;
+					margin-left: 0;
+					font-size: 1.1111em;
+					font-weight: 600;
+					
+					&:before {
+						content: "";
+						display: inline-block;
+						vertical-align: middle;
+						margin-right: 1em;
+						width: 11px;
+						height: 11px;
+						border-top: 1px solid map-get( $colors, 'red' );
+						border-right: 1px solid map-get( $colors, 'red' );
+						@include add-prefixes( transform, rotate( 45deg ) );
+					}
+				}
+			}
+		}
+	}
+	
+	.modal {		
+		& > div {
+			margin: 3.5em 2em 3em;
+		}
+	}
+	
+	.pre-footer {
+		display: none;
+	}
+	
+	// starts under header now
+	.hero {
+		margin-top: 66px;
+		padding: 5vw 0 5vw;
+	}
+	
+	// preserve 5 across layout down to ipad vertical
+	.tab-group {
+		.tabs li {
+			width: 130px;
+		}
+	}
+	
+	.tax-participant-year {
+		.modal > div {
+			text-align: left;
+			
+			&:after {
+				display: none;
+			}
+			
+			figure, .participant-info {
+				display: block;
+			}
+			figure {
+				width: 330px;
+				max-width: 100%;
+				margin-bottom: .5em;
+			}
+			.participant-info {
+				width: 100%;
+			}
+		}
+		
+		// rows of 3
+		.participants {
+			article {
+				width: 29%;
+				margin: 0 calc( 2.1666% - .125em ) 1em;
+			}
+		}
+	}
+}
+
+@media (max-width: 800px) {
+	.hero {
+		.hero-content {
+			h4 {
+				font-size: 2.5vw;
+			}
+		}
+	}
+	
+	.partner-list {
+		& > div {
+			figure {
+				width: 30%;
+				padding-right: 0;
+				float: none;
+				margin-bottom: .5em;
+				text-align: left;
+			}
+			
+			.partner-info {
+				float: none;
+				width: 100%;
+			}
+		}
+		
+	}
+}
+
+@media (max-width: 750px) {
+	.modal {
+		left: 1em;
+		width: calc( 100% - 1em );
+		top: 1em;
+		height: calc( 100% - 1em );
+		
+		& > div {
+			margin: 3.5em 1em 1em;
+			height: calc( 100vh - 7em );
+		}
+	}
+	
+	.opener-group {
+		& > div.hidden {
+			padding: 1.5em 2em;
+		}
+	}
+
+	// tab group loses active ^ and start stacking as they need to
+	.tab-group {
+		.tabs {
+			// remove force justify
+			text-align: center;
+			
+			&:after {
+				display: none;
+			}
+			
+			li {
+				margin: .75em;
+				
+				&.active {
+					a {
+						&:after {
+							display: none;
+						}
+					}
+				}
+			}
+		}
+		
+		.tab-content {
+			margin-top: 1em;
+			
+			figure {
+				display: none;
+			}
+		}
+	}
+	
+	.tax-participant-year {		
+		// rows of 2
+		.participants {
+			article {
+				width: 45%;
+				margin: 0 calc( 2.5% - .125em ) 1em;
+			}
+		}
+	}
+}
+
+@media (max-width: 550px) {
+	footer {
+		nav {			
+			li {
+				margin: 0;
+				
+				a {
+					padding: .5em .4em;
+				}
+			}
+		}
+	}
+	
+	header {
+		h3 {
+			font-size: .8em;
+		}
+		
+		.logo {
+			width: 103px;
+			height: 22px;
+		}
+	}
+	
+	.hero {
+		.hero-content {
+			h4 {
+				font-size: 3vw;
+			}
+		}
+	}
+	
+	.opener-group {
+		& > div.hidden {
+			padding: 1em;
+		}
+	}
+	
+	.home .hero {
+		.hero-content {
+			//max-width: 80%;
+		}
+	}
+	
+	.partner-list {
+		& > div {
+			figure {
+				width: 40%;
+			}
+		}
+	}
+	
+	.tab-group {
+		.tabs {
+			li {
+				font-size: .9em;
+				margin: .75em .3em;
+				width: 100px;
+			}
+		}
+	}
+}
+
+
+@media (max-width: 450px) {
+	header {
+		nav {
+			a[href="#close"] {
+				width: 66px;
+			}
+		}
+	}
+	
+	.modal {
+		left: 0;
+		width: 100%;
+		top: 0;
+		height: 100%;
+		
+		& > div {
+			height: calc( 100vh - 5em );
+		}
+	}
+	
+	.tax-participant-year {		
+		// stacking
+		.participants {
+			margin: 0;
+			
+			article {
+				width: 100%;
+				margin: 0 0 2em;
+			}
+		}
+	}
+}
+
+
+@media (max-width: 400px) {
+	body main, input, select, textarea, .hero .button, .modal {
+		font-size: 14px;
+	}
+	
+	footer {
+		padding-top: 9em;
+	}
+	
+	header {
+		h3, .logo {
+			position: absolute;
+			right: 0;
+		}
+		
+		h3 {
+			top: .9em;
+		}
+		.logo {
+			top: .7em;
+		}
+	}
+	
+	.hero {
+		.hero-content {
+			h4 {
+				font-size: 3.5vw;
+			}
+		}
+	}
+	
+	.modal {
+		& > div {
+			margin-top: 4em;
+			height: calc( 100vh - 5.5em );
+		}
+	}
+	
+	ol.standard, ul.standard, main ol, main ul, .modal ol, .modal ul {
+		padding-left: 25px;
+	}
+}

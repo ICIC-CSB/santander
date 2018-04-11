@@ -1,0 +1,311 @@
+/**
+ * login wrapper
+ * (in skinless-ui template)
+ */
+.skinless-ui {
+
+	.login-content {
+		width: 100%;
+		max-width: 920px;
+	}
+
+	[data-module="login-wrapper"] {
+		@include minmax(margin, 5%, 0);
+		background-color: transparent;
+
+		input[type="password"],
+		input[type="text"] {
+			@include minmax(margin, 2.5%, 2.5%);
+			max-width: 440px;
+		}
+
+		p.field-wrap {
+			@include minmax(margin, 0, 2.5%);
+
+			input {
+				margin: 0;
+			}
+		}
+
+	}
+
+}
+
+.login-content {
+
+	&.register-form {
+
+		.acf-user-register-fields,
+		h2 {
+			display: none;
+		}
+	}
+}
+
+/**
+ * login wrapper
+ */
+[data-module="login-wrapper"] {
+	border: 1px solid $steel;
+	background-color: $gray;
+
+	input[type="password"],
+	input[type="text"] {
+		@include font-size(16px);
+		display: block;
+		padding: 10px;
+		width: 100%;
+		border: 1px solid $pebble;
+
+		&.error {
+			border: 1px solid  $red;
+		}
+
+		&:outline {
+			border: none;
+		}
+
+		&:focus {
+			border: 1px solid $slate;
+		}
+
+		&::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+			color: $pebble;
+		}
+
+		&::-moz-placeholder { /* Firefox 19+ */
+			color: $pebble;
+		}
+
+		&:-ms-input-placeholder { /* IE 10+ */
+			color: $pebble;
+		}
+
+		&:-moz-placeholder { /* Firefox 18- */
+			color: $pebble;
+		}
+	}
+
+	label {
+		@include font-size(16px);
+		display: block;
+		margin-bottom: 10px;
+
+		&.error {
+			display: none !important;
+		}
+
+	}
+
+	.login-wrapper-form {
+		padding: 30px 40px;
+
+		.message {
+			@include font-size(16px);
+			@include minmax(margin, 2.5%, 4%);
+			margin: 20px 0 40px;
+		}
+
+		h5 {
+			@include minmax(margin, 2.5%, 4%);
+			font-weight: 600;
+		}
+	}
+
+	.login-wrapper-nav {
+		@include font-size(24px, 18px);
+		overflow: hidden;
+
+		@include breakpoint(990px) {
+			@include font-size(18px, 14px);
+		}
+
+		a {
+			width: 50%;
+			float: left;
+			display: block;
+			font-weight: 600;
+			padding: 15px 40px;
+			color: $smoke;
+
+			@include breakpoint(1060px) {
+				padding: 15px 20px;
+			}
+
+			@include breakpoint(500px) {
+				padding: 5%;
+			}
+
+			&.active {
+				background-color: $metal;
+			}
+		}
+	}
+
+}
+
+// action links
+.tml-action-links {
+	margin: 0 !important;
+	padding: 0 !important;
+
+	li {
+		list-style: none !important;
+	}
+}
+
+// remember me
+.tml-rememberme-wrap {
+	label,
+	input[type="checkbox"] {
+		display: inline;
+	}
+}
+
+// register confirm messaging
+.tml-registration-confirmation {
+	font-style: italic;
+}
+
+// close button for mini login
+.close-login-mini-wrap {
+	display: none;
+
+	@include breakpoint(1020px) {
+		display: block;
+		position: absolute;
+		top: 0;
+		right: 10px;
+	}
+}
+
+/**
+ * mini login
+ */
+.login-mini-wrap {
+	position: fixed;
+	display: none;
+	background-color: $slate;
+	padding: 40px;
+	margin-left: -100px;
+	min-width: 400px;
+
+	.login-link {
+		color: $white;
+
+		i {
+			color: $red;
+			padding-right: 10px;
+		}
+	}
+
+	&.opened {
+		top: 0;
+		left: 0;
+		z-index: 1000;
+		width: 100%;
+		height: 100%;
+		margin: 0;
+		display: block;
+
+		.login-mini-wrap-inner {
+			@include vertical-align();
+			width: 90%;
+			margin: 0 auto;
+		}
+	}
+
+	@include breakpoint(1277px) {
+		margin-left: -300px;
+	}
+
+	@include breakpoint(1277px) {
+		margin-left: -300px;
+	}
+
+	@include breakpoint(1020px) {
+		@include minmax(margin, 2.5%, 0);
+		display: none;
+		margin-left: 0;
+		padding: 0;
+		min-width: 0;
+
+		p {
+			@include font-size(16px);
+		}
+	}
+
+	label {
+		@include font-size(16px);
+		color: $white;
+		display: block;
+		line-height: 1;
+
+		&.error {
+			display: none !important;
+		}
+	}
+
+	input[type="password"],
+	input[type="text"] {
+		@include font-size(14px);
+		display: block;
+		padding: 10px;
+		width: 100%;
+		background-color: $white;
+		margin: 10px 0;
+		border: 1px solid  $white;
+
+		&:focus {
+			border: 1px solid $slate;
+		}
+
+		&.error {
+			border: 1px solid  $red;
+		}
+	}
+
+	.tml-user-pass-wrap {
+		margin-bottom: 0;
+	}
+
+	p {
+		margin-bottom: 20px;
+		line-height: 1;
+	}
+
+	a {
+		color: $red;
+	}
+
+	.tml-submit-wrap {
+		margin-top: 30px;
+		margin-bottom: 30px;
+	}
+
+}
+
+/**
+ * login button on main nav
+ */
+.nav-primary {
+	li.featured {
+
+		@include breakpoint(1020px) {
+			padding: 0;
+		}
+		&:hover {
+			.login-mini-wrap {
+				display: block;
+
+				@include breakpoint(1020px) {
+					display: none;
+
+					&.opened {
+						display: block;
+					}
+				}
+			}
+		}
+	}
+}
