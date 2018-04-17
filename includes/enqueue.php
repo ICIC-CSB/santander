@@ -23,6 +23,7 @@ function enqueue_assets() {
 
 		wp_enqueue_style( 'wpx.styles.min', assets_url().'/styles/screen.min.css', false, false);
 		wp_enqueue_script( 'wpx.script.min', assets_url().'/js/app.min.js', false, null, true);
+		wp_enqueue_script('poulin.scripts', WPX_THEME_URL . '/assets/js/scripts.js', array('jquery'), false, false);
 
 	}
 
