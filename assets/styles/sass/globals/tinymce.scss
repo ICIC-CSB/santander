@@ -41,6 +41,13 @@
 			color: #fff;
 		}
 
+		&.warning {
+			border-radius: 5px;
+			background-color: #ffee75;
+			padding: 10px 15px;
+			color: $smoke;
+		}
+
 		&.error {
 			border-radius: 5px;
 			background-color: #ec0000;

@@ -8,7 +8,6 @@
  * @version 1.0
  *
 */
-
 the_post();
 
 get_header();

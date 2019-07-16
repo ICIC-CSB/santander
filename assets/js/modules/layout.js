@@ -33,6 +33,11 @@ jQuery(document).ready(function($) {
 			// inline retina images
 			$('img.retina[data-2x]').dense();
 
+			// shows checkbox for enabling 2-fa
+			$('.two-factor-notice + div + h2 + .form-table + h3 + .form-table > tbody > tr:last-child th').text('Enable two-factor login?');
+			$('.two-factor-notice + div + h2 + .form-table + h3 + .form-table > tbody > tr:last-child').show();
+
+
 		},
 
 		/*

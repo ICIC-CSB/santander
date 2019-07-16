@@ -54,3 +54,14 @@ function enqueue_ga() {
 	endif;
 }
 add_action('wp_head', '\WPX\Enqueue\enqueue_ga');
+
+
+/**
+* Google Analytics
+*/
+function enqueue_recaptcha() {
+	if (!is_page('register')) :
+		echo "<script src='https://www.google.com/recaptcha/api.js' async defer></script>";
+	endif;
+}
+add_action('wp_head', '\WPX\Enqueue\enqueue_recaptcha');

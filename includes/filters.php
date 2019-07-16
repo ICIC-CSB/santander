@@ -9,51 +9,42 @@
  */
 namespace WPX\Filters;
 
-function tml_message( $message ) {
-	switch ( $message) {
-		case 'Register For This Site' :
-			$message = '';
-			break;
-		case 'Please enter your username or email address. You will receive a link to create a new password via email.':
-			break;
-		case 'resetpass':
-			break;
-		default:
-			$message = '';
-	}
-	return $message;
-}
-add_filter( 'login_message', '\WPX\Filters\tml_message', 11, 2 );
+/**
+ * Add Post State
+ */
+function add_post_state( $post_states, $post ) {
 
-function tml_title( $title, $action ) {
-	if ( is_user_logged_in() ) {
-		$user = wp_get_current_user;
-		if ( 'profile' == $action )
-			$title = 'Participant Application Form';
-		else
-			$title = sprintf( 'Welcome, %s', $user->display_name );
-	} else {
-		switch ( $action ) {
-			case 'register' :
-				$title = 'Sign Up';
-				$message = "Test";
-				break;
-			case 'lostpassword':
-				$title  = "Forgot Password?";
-				break;
-			case 'retrievepassword':
-			case 'resetpass':
-			case 'rp':
-				$title = 'Password Recovery';
-				break;
-			case 'login':
-			default:
-				$title = 'Sign In';
+	if( $post->post_name == 'edit-profile' ) {
+		$post_states[] = 'Edit Profile';
+	}
+
+	return $post_states;
+}
+
+add_filter( 'display_post_states', '\WPX\Filters\add_post_state', 10, 2 );
+
+/**
+ * Redirect to Application After Successful Login.
+ *
+ * @param string $redirect_to URL to redirect to.
+ * @param string $request URL the user is coming from.
+ * @param object $user Logged user's data.
+ * @return string
+ */
+function my_login_redirect( $redirect_to, $request, $user ) {
+	//is there a user to check?
+	if (isset($user->roles) && is_array($user->roles)) {
+		//check for subscribers
+		if (in_array('subscriber', $user->roles)) {
+			// redirect them to another URL, in this case, the homepage 
+			$redirect_to = get_bloginfo().'/application/';
 		}
 	}
-	return $title;
+
+	return $redirect_to;
 }
-add_filter( 'tml_title', '\WPX\Filters\tml_title', 11, 2 );
+
+add_filter( 'login_redirect', 'WPX\Filters\my_login_redirect', 10, 3 );
 
 /**
  * Move Featured Image Metabox
@@ -92,8 +83,7 @@ add_filter( 'admin_post_thumbnail_html', '\WPX\Filters\add_featured_image_instru
  * @param string $domain
  * @return string 
  */
-function change_excerpt_name( $translation, $original )
-{
+function change_excerpt_name( $translation, $original ) {
 	if ( 'Excerpt' == $original ) {
 		return 'Excerpt';
 	} else {
@@ -159,32 +149,26 @@ function yoasttobottom() {
 add_filter( 'wpseo_metabox_prio', '\WPX\Filters\yoasttobottom');
 
 /**
- * Adds Google Map Key for ACF
+ * Custom Images Sizes to Menus
  */
-function my_acf_init(){
-	acf_update_setting('google_api_key', 'YOUR KEY HERE');
-}
-// add_filter('acf/init', '\WPX\Filters\my_acf_init');
-
-
-// add custom image sizes to menus
 add_filter( 'image_size_names_choose', function ( $sizes ) {
   global $_wp_additional_image_sizes;
   if ( empty($_wp_additional_image_sizes) ) {
-    return $sizes;
+	return $sizes;
   }
 
   foreach ( $_wp_additional_image_sizes as $id => $data ) {
-    if ( !isset($sizes[$id]) )
-      $sizes[$id] = ucfirst( str_replace( '-', ' ', $id ) );
+	if ( !isset($sizes[$id]) )
+	  $sizes[$id] = ucfirst( str_replace( '-', ' ', $id ) );
   }
 
   return $sizes;
 } );
 
 
-// editor buttons and style select
-// how to add buttons and custom style select
+/**
+ * Scott/Shortcodes
+ */
 add_filter('mce_buttons_2', function ( $buttons ) {
 	$but1 = array_slice( $buttons, 0, 1 );
 	$but2 = array_slice( $buttons, 1 );
@@ -286,14 +270,16 @@ add_filter( 'tiny_mce_before_init', function ( $init_array ) {
 } );
 
 
-// include post thumbnail in column listing
+/**
+ * Add Post Thumbnail to Admin Cols
+ */
 add_filter('manage_posts_columns', function ($defaults){
-    $defaults['riv_post_thumbs'] = __('Thumbs');
-    return $defaults;
+	$defaults['riv_post_thumbs'] = __('Thumbs');
+	return $defaults;
 }, 5);
 
 add_action('manage_posts_custom_column', function ($column_name, $id){
-   	if($column_name === 'riv_post_thumbs'){
-        echo the_post_thumbnail( array(75, 75) );
-    }
+	if($column_name === 'riv_post_thumbs'){
+		echo the_post_thumbnail( array(75, 75) );
+	}
 }, 5, 2);

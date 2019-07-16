@@ -65,6 +65,7 @@
 		.two-factor-authentication-wrap {
 			border: 1px solid $steel;
 			padding: 30px;
+			overflow: hidden;
 		}
 
 		.button-primary {
@@ -122,10 +123,10 @@
 	}
 
 	.button {
-		position: absolute;
-		right: 0;
-		top: 50%;
-		margin-top: -22.5px;
+		//position: absolute;
+		//right: 0;
+		//top: 50%;
+		//margin-top: -22.5px;
 		color: $red;
 		background-color: $steel;
 

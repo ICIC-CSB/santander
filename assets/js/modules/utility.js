@@ -7,6 +7,7 @@ jQuery(document).ready(function($) {
 		$loginMiniWrapClose: $(".close-login-mini-wrap"),
 		$loginMiniWrap: $('.login-mini-wrap'),
 		$loginMiniForm: $('#loginform-mini'),
+		$mainLoginForm: $('.login-area #loginform'),
 
 		init: function() {
 			
@@ -21,9 +22,17 @@ jQuery(document).ready(function($) {
 
 			// validate forms
 			WPX.Utility.$loginMiniForm.addClass('validate');
-			$('form.validate').each(function( index ) {
-				$(this).find('input[type="text"]').addClass('required').addClass('email');
-				$(this).find('input[type="password"]').addClass('required');
+			WPX.Utility.$mainLoginForm.addClass('validate');
+
+			$('#loginform').each(function( index ) {
+				$(this).find('#user_login').addClass('required').addClass('email');
+				$(this).find('#user_pass').addClass('required');
+				$(this).validate();
+			});
+
+			$('#loginform-mini').each(function( index ) {
+				$(this).find('#user_login_mini').addClass('required').addClass('email');
+				$(this).find('#user_pass_mini').addClass('required');
 				$(this).validate();
 			});
 
@@ -46,9 +55,23 @@ jQuery(document).ready(function($) {
 				$(this).closest('.tml-profile').addClass('active');
 			});
 
+			$( "#menu-primary-navigation .featured > a" ).hover(
+			  function() {
+				if (WPX.Layout.$mobileState === true) {
+					// no
+				} else {
+					$(this).closest('li').find('.login-mini-wrap').show();
+				}
+			  }, function() {}
+			);
+
 			WPX.Utility.$loginMiniWrapClose.click(function(event) {
 				event.preventDefault();
-				WPX.Utility.$loginMiniWrap.removeClass('opened');
+				if (WPX.Layout.$mobileState === true) {
+					WPX.Utility.$loginMiniWrap.removeClass('opened');
+				} else {
+					$(this).closest('li').find('.login-mini-wrap').hide();
+				}
 			});
 
 		}

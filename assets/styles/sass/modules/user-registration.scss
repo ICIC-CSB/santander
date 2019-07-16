@@ -1,0 +1,72 @@
+/**
+ * user registration plugin
+ */
+.ur-frontend-form {
+	#ur-submit-message-node {
+		li {
+			margin-bottom: 0;
+		}
+	}
+}
+
+
+#user-registration {
+
+	.user-registration-error li, 
+	.user-registration-message li {
+		margin-top: .5em;
+
+		strong {
+			margin-right: 5px;
+		}
+	}
+
+	.ur-frontend-form form button[type=submit], .ur-frontend-form form input[type=submit] {
+		line-height: 1;
+	}
+
+	.ur-frontend-form.login  {
+		padding-top: 40px;
+	}
+
+	&.vertical {
+
+		.user-registration-message {
+			a {
+				color: $red;
+			}
+		}
+
+		a {
+			color: #575757;
+		}
+
+		.user-registration-MyAccount-navigation {
+			ul {
+				.user-registration-MyAccount-navigation-link.is-active {
+					a {
+						border-color: $red;
+					}
+				}
+			}
+		}
+
+		.user-registration-MyAccount-content {
+			border: 1px solid #eee;
+
+			a {
+				color: $red;
+			}
+		}
+
+		.user-registration-profile-header {
+			display: none !important;
+		}
+
+		header {
+			position: static;
+		}
+
+	}
+
+}

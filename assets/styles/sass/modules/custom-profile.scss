@@ -1,0 +1,44 @@
+#dashboard-content {
+
+	.two-factor-notice + div + h2 + .form-table + h3 + .form-table > tbody > tr,
+	#GA_description,
+	#GA_secret,
+	.two-factor-notice + div + h2 + .form-table,
+	.form-table + h3 {
+		display: none;
+	}
+
+	.two-factor-notice + div + h2 + .form-table + h3 + .form-table > tbody > tr td,
+	.two-factor-notice + div + h2 + .form-table + h3 + .form-table > tbody > tr th {
+		display: block;
+	}
+
+	.two-factor-notice + div + h2 + .form-table + h3 + .form-table > tbody > tr th {
+		float: left;
+	}
+
+	.two-factor-notice + div + h2 + .form-table + h3 + .form-table > tbody > tr td {
+		float: right;
+		padding-left: 10px;
+	}
+
+	.two-factor-notice + div + h2 + .form-table + h3 + .form-table {
+		margin: 20px 0;
+		overflow: hidden;
+		max-width: 300px;
+	}
+
+	.error {
+		background: #eee;
+		color: $red;
+		padding: 20px;
+		border-top: 2px solid $steel;
+	}
+
+	.success {
+		background: rgba(143,174,27,.1);
+		color: #596c11;
+		padding: 20px;
+		border-top: 2px solid #8fae1b;
+	}
+}

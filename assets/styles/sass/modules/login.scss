@@ -33,6 +33,11 @@
 
 .login-content {
 
+	.ur-frontend-form   {
+		border: none;
+		padding: 0;
+	}
+
 	&.register-form {
 
 		.acf-user-register-fields,
@@ -45,10 +50,19 @@
 /**
  * login wrapper
  */
+#password-lost-form-wrap,
+.user-registration-form-row,
+.user-registration-profile-fields__field-wrapper,
 [data-module="login-wrapper"] {
 	border: 1px solid $steel;
 	background-color: $gray;
 
+	.user-registration-error::before,
+	.user-registration-message::before {
+		display: none;
+	}
+
+	input[type="email"],
 	input[type="password"],
 	input[type="text"] {
 		@include font-size(16px);
@@ -57,6 +71,11 @@
 		width: 100%;
 		border: 1px solid $pebble;
 
+		&[readonly="readonly"] {
+			color: #eee;
+		}
+
+		&[aria-invalid="true"],
 		&.error {
 			border: 1px solid  $red;
 		}
@@ -67,6 +86,10 @@
 
 		&:focus {
 			border: 1px solid $slate;
+
+			&[aria-invalid="true"] {
+				border-color: $red;
+			}
 		}
 
 		&::-webkit-input-placeholder { /* Chrome/Opera/Safari */
@@ -99,6 +122,10 @@
 
 	.login-wrapper-form {
 		padding: 30px 40px;
+
+		@include breakpoint(400px) {
+			padding: 30px 15px;
+		}
 
 		.message {
 			@include font-size(16px);
@@ -144,6 +171,14 @@
 
 }
 
+#password-lost-form-wrap,
+.user-registration-form-row,
+.user-registration-profile-fields__field-wrapper {
+	background-color: transparent;
+	border: none;
+	color: #575757;
+}
+
 // action links
 .tml-action-links {
 	margin: 0 !important;
@@ -169,7 +204,10 @@
 
 // close button for mini login
 .close-login-mini-wrap {
-	display: none;
+	@include font-size(24px);
+	position: absolute;
+	top: 0;
+	right: 30px;
 
 	@include breakpoint(1020px) {
 		display: block;
@@ -189,6 +227,10 @@
 	padding: 40px;
 	margin-left: -100px;
 	min-width: 400px;
+
+	em {
+		color: #777;
+	}
 
 	.login-link {
 		color: $white;
@@ -294,6 +336,7 @@
 		@include breakpoint(1020px) {
 			padding: 0;
 		}
+		/*
 		&:hover {
 			.login-mini-wrap {
 				display: block;
@@ -307,5 +350,6 @@
 				}
 			}
 		}
+		*/
 	}
 }

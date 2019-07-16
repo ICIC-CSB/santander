@@ -12,16 +12,16 @@
 	<section class="pre-footer bg-red">
 		<div class="container">
 			<nav>
-				<?php wp_nav_menu( array('menu' => 'Primary Navigation', 'container' => 'ul', 'menu_class' => 'main' ) ); ?>
+				<?php wp_nav_menu( array('theme_location' => 'primary', 'container' => 'ul', 'menu_class' => 'main' ) ); ?>
 			</nav>
 		</div>
 	</section>
 	
 	<footer>
 		<div class="container">
-			<p>&copy; <?= date('Y') ?> Santander Bank, N. A. Equal Housing Lender - Member FDIC</p>
+			<p>&copy; <?php date('Y'); ?> Santander Bank, N. A. Equal Housing Lender - Member FDIC</p>
 			<nav>
-				<?php wp_nav_menu( array('menu' => 'Footer Navigation', 'container' => 'ul' ) ); ?>
+				<?php wp_nav_menu( array('theme_location' => 'footer', 'container' => 'ul' ) ); ?>
 			</nav>
 		</div>
 	</footer>
@@ -29,15 +29,11 @@
 	<?php wp_footer(); ?>
 
 	<?php if (WP_DEBUG == true) : ?>
-		<!-- bower:js -->
-		<script src="<?php bloginfo("url") ?>/wp-content/themes/wpx/assets/js/bower/jquery-placeholder/jquery.placeholder.js"></script>
-		<script src="<?php bloginfo("url") ?>/wp-content/themes/wpx/assets/js/bower/jquery-validation/dist/jquery.validate.js"></script>
-		<script src="<?php bloginfo("url") ?>/wp-content/themes/wpx/assets/js/bower/jquery.fitvids/jquery.fitvids.js"></script>
-		<script src="<?php bloginfo("url") ?>/wp-content/themes/wpx/assets/js/bower/enquire/dist/enquire.js"></script>
-		<script src="<?php bloginfo("url") ?>/wp-content/themes/wpx/assets/js/bower/slick-carousel/slick/slick.js"></script>
-		<script src="<?php bloginfo("url") ?>/wp-content/themes/wpx/assets/js/bower/dense/src/dense.js"></script>
-		<!-- endbower -->
+		<!-- inject:yarn:js -->
+		<script src="<?php echo assets_url(); ?>/js/libraries.js"></script>
+		<!-- endinject -->
 		<!-- inject:vendor:js -->
+		<script src="<?php echo assets_url(); ?>/js/vendor/enquire.js"></script>
 		<script src="<?php echo assets_url(); ?>/js/vendor/jquery.imagesloaded.js"></script>
 		<script src="<?php echo assets_url(); ?>/js/vendor/jquery.matchheight.js"></script>
 		<!-- endinject -->

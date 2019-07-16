@@ -35,12 +35,17 @@ require_once(WPX_THEME_PATH."includes/utility.php");
 */
 require_once(WPX_THEME_PATH."includes/widgets/categories.php");
 
+// remove admin bar for non-admins
+if ( ! current_user_can( 'manage_options' ) ) {
+    show_admin_bar( false );
+}
+
 /**
  * CPTs & Taxonomies
  */
 function wpx_architecture() {
 
-	add_action( 'reminder_email', 'trigger_reminder_email' );
+	add_action( 'santander_reminder_email', 'reminder_email' );
 
 	// include taxonomies
 	require_once(WPX_THEME_PATH."includes/taxonomies/participant-year.php");
@@ -137,28 +142,6 @@ function wpx_setup() {
 add_action( 'after_setup_theme', 'wpx_setup', 0 );
 
 /**
- * Set the content width in pixels, based on the theme's design and stylesheet.
- *
- * Priority 0 to make it available to lower priority callbacks.
- *
- * @global int $content_width
- */
-function wpx_content_width() {
-
-	$content_width = 990;
-
-	/**
-	 * Filter Twenty Seventeen content width of the theme.
-	 *
-	 * @since Twenty Seventeen 1.0
-	 *
-	 * @param $content_width integer
-	 */
-	$GLOBALS['content_width'] = apply_filters( 'twentyseventeen_content_width', $content_width );
-}
-//add_action( 'after_setup_theme', 'wpx_content_width', 0 );
-
-/**
 * Pre Get Posts
 */
 function wpx_pre_get_posts( $wp_query ) {
@@ -241,11 +224,27 @@ function wpx_load_meta( $id = false ) {
 }
 
 /**
- * Sends Reminder Email
+ * Creates 5-min cron reminder
  */
-function trigger_reminder_email() {
+function fiveminute_cron($schedules){
+	if(!isset($schedules["fivemins"])){
+		$schedules["fivemins"] = array(
+			'interval' => 5*60,
+			'display' => __('Once every 5 minutes'));
+	}
+	return $schedules;
+}
+add_filter('cron_schedules','fiveminute_cron');
 
-	\WPX\Custom\write_log('called reminder email');
+/**
+ * Sends Reminder Email
+ *
+ * This occurs once a day. It loops through all the submissions
+ * finds ones that are not completed, and sends them reminder emails.
+ */
+function reminder_email() {
+
+	\WPX\Custom\write_log('Executing reminder email.');
 
 	// loop thru all subscribers
 	$args = array( 'role' => 'Subscriber');
@@ -272,10 +271,13 @@ function trigger_reminder_email() {
 				))
 			);
 
-			// we found a submission or the user_is_locked field is active, or the user has not yet confirmed registration
-			if ($has_submission->have_posts() || get_user_meta($user->ID, 'user_is_locked', true) || Theme_My_Login_Security::is_user_locked( $user->ID )) :
+			// is this user verified or not?
+			$verified = get_user_meta($user->ID, 'ur_confirm_email', true);  
 
-				// don't do anything
+			// we found a complete submissionor the user_is_locked field is active or the user is still pending registration
+			if ($has_submission->have_posts() || get_user_meta($user->ID, 'user_is_locked', true) || $verified !== '1') :
+
+				// this user does not need a reminder
 				\WPX\Custom\write_log('user '.$user->user_email.' is locked or we found a submission');
 
 			else :
@@ -285,13 +287,17 @@ function trigger_reminder_email() {
 				// (so technically if this email is going out to detached subscribers)
 				// (then the subscriber needs to be deleted)
 
-				$to = $user->user_email;
-				$subject = "Don't forget to finish your Cultivate Small Business application";
-				$body = "This is a friendly reminder to finish and submit your application to the Santander Cultivate Small Business program before the July 27, 2018 deadline.\r\n\r\nYou can access your account here: ".get_bloginfo('url')."\r\n\r\nQuestions? See our FAQ page: ".get_bloginfo('url')."/faq/ or email Maggie at mmcdonough@icic.org.";
-				$headers[] = 'From: Santander Bank <mmcdonough@icic.org>';
-				$result = wp_mail( $to, $subject, $body, $headers);
-
 				\WPX\Custom\write_log('user '.$user->user_email.', who is not locked and has no submission, sent email');
+
+				$copy_subject = get_field('reminder_subject_line','options');
+				$copy_body = get_field('reminder_body_copy','options');
+				$copy_from = get_field('reminder_from_line','options');
+
+				$to = $user->user_email;
+				$subject = $copy_subject;
+				$body = $copy_body;
+				$headers[] = $copy_from;
+				$result = wp_mail( $to, $subject, $body, $headers);
 
 			endif;
 
@@ -300,5 +306,5 @@ function trigger_reminder_email() {
 	endif;
 
 	wp_reset_postdata();
-	
+
 }
