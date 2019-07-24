@@ -69,9 +69,6 @@ get_template_part( 'partials/hero' ); ?>
 										<em>If you don't have an authentication code, leave this field empty.</em>
 									</p>
 									
-									<?php $sitekey = get_field('recaptcha_site_key','options'); ?>
-									<?php if ($sitekey) : ?><div class="g-recaptcha" style="margin-bottom: 20px;" data-sitekey="<?php echo $sitekey; ?>"></div><?php endif; ?>
-
 									<p class="login-remember"><label><input name="rememberme" type="checkbox" id="rememberme" value="forever"> Remember Me</label></p>
 									<p class="submit">
 										<input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="<?php esc_attr_e('Resume Application'); ?>" />

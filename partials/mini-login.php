@@ -36,9 +36,6 @@
 						<em>If you don't have one, leave empty.</em>
 					</p>
 
-					<?php $sitekey = get_field('recaptcha_site_key','options'); ?>
-					<?php if ($sitekey) : ?><div class="g-recaptcha" style="margin-bottom: 20px;" data-sitekey="<?php echo $sitekey; ?>"></div><?php endif; ?>
-
 					<p class="login-submit">
 						<input type="submit" name="wp-submit" id="wp-submit_mini" class="button button-primary" value="Resume Application">
 						<input type="hidden" name="redirect_to" value="<?php echo esc_attr(get_bloginfo('url').'/application/'); ?>" />

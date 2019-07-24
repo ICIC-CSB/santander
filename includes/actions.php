@@ -50,33 +50,6 @@ function verify_user_pass($user, $username, $password) {
 		exit;
 	}
 
-	$secretKey = get_field('recaptcha_secret_key','options');
-
-	if ($secretKey) {
-
-		if( isset($_POST['g-recaptcha-response']) ) {
-			$captcha = $_POST['g-recaptcha-response'];
-		}
-
-		if(!$captcha) {
-			wp_redirect($login_page . "?action=recaptchafail");
-			exit;
-		} else {
-			// post request to server
-			$url = 'https://www.google.com/recaptcha/api/siteverify?secret=' . urlencode($secretKey) .  '&response=' . urlencode($captcha);
-			$response = file_get_contents($url);
-			$responseKeys = json_decode($response,true);
-
-			// should return JSON with success as true
-			if( $responseKeys["success"] ) {
-				// proceed
-			} else {
-				wp_redirect($login_page . "?action=recaptchafail");
-				exit;
-			}
-		}
-
-	}
 
 }
 add_filter('authenticate', '\WPX\Actions\verify_user_pass', 1, 3);
