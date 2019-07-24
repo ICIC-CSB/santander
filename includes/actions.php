@@ -25,38 +25,6 @@ if(!is_user_logged_in()){
 	add_action('init','\WPX\Actions\custom_login_page');
 }
 
-function ur_validate_recaptcha($single_form_field, $data, $filter_hook, $form_id) {	
-
-	var_dump($data);
-	exit;
-
-	if( isset($_POST['g-recaptcha-response']) ) {
-		$captcha = $_POST['g-recaptcha-response'];
-	}
-
-	if(!$captcha) {
-
-		add_filter( $filter_hook, function ( $msg ) use ( $field_label ) { return __( 'The recaptcha code is empty or incorrect.', 'user-registration' ); });
-
-	} else {
-
-		$secretKey = "6LfendESAAAAAKIXuoRG5j7Oxv_TCNW3If_xngh8";
-		// post request to server
-		$url = 'https://www.google.com/recaptcha/api/siteverify?secret=' . urlencode($secretKey) .  '&response=' . urlencode($captcha);
-		$response = file_get_contents($url);
-		$responseKeys = json_decode($response,true);
-
-		// should return JSON with success as true
-		if( $responseKeys["success"] ) {
-			// proceed
-		} else {
-			add_filter( $filter_hook, function ( $msg ) use ( $field_label ) { return __( 'The recaptcha code is empty or incorrect.', 'user-registration' ); });
-		}
-	}
-
-}
-add_action( 'user_registration_validate_text','\WPX\Actions\ur_validate_recaptcha',10,4);
-
 /**
  * redirect to /login/ with action query
  * for failed username
@@ -82,27 +50,32 @@ function verify_user_pass($user, $username, $password) {
 		exit;
 	}
 
-	if( isset($_POST['g-recaptcha-response']) ) {
-		$captcha = $_POST['g-recaptcha-response'];
-	}
+	$secretKey = get_field('recaptcha_secret_key','options');
 
-	if(!$captcha) {
-		wp_redirect($login_page . "?action=recaptchafail");
-		exit;
-	} else {
-		$secretKey = "6LfendESAAAAAKIXuoRG5j7Oxv_TCNW3If_xngh8";
-		// post request to server
-		$url = 'https://www.google.com/recaptcha/api/siteverify?secret=' . urlencode($secretKey) .  '&response=' . urlencode($captcha);
-		$response = file_get_contents($url);
-		$responseKeys = json_decode($response,true);
+	if ($secretKey) {
 
-		// should return JSON with success as true
-		if( $responseKeys["success"] ) {
-			// proceed
-		} else {
+		if( isset($_POST['g-recaptcha-response']) ) {
+			$captcha = $_POST['g-recaptcha-response'];
+		}
+
+		if(!$captcha) {
 			wp_redirect($login_page . "?action=recaptchafail");
 			exit;
+		} else {
+			// post request to server
+			$url = 'https://www.google.com/recaptcha/api/siteverify?secret=' . urlencode($secretKey) .  '&response=' . urlencode($captcha);
+			$response = file_get_contents($url);
+			$responseKeys = json_decode($response,true);
+
+			// should return JSON with success as true
+			if( $responseKeys["success"] ) {
+				// proceed
+			} else {
+				wp_redirect($login_page . "?action=recaptchafail");
+				exit;
+			}
 		}
+
 	}
 
 }

@@ -36,7 +36,8 @@
 						<em>If you don't have one, leave empty.</em>
 					</p>
 
-					<div class="g-recaptcha" style="margin-bottom: 20px;" data-sitekey="6LfendESAAAAAN1stiEC5LgfvCWi-Otl2T1KdddW"></div>
+					<?php $sitekey = get_field('recaptcha_site_key','options'); ?>
+					<?php if ($sitekey) : ?><div class="g-recaptcha" style="margin-bottom: 20px;" data-sitekey="<?php echo $sitekey; ?>"></div><?php endif; ?>
 
 					<p class="login-submit">
 						<input type="submit" name="wp-submit" id="wp-submit_mini" class="button button-primary" value="Resume Application">

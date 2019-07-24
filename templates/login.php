@@ -69,7 +69,8 @@ get_template_part( 'partials/hero' ); ?>
 										<em>If you don't have an authentication code, leave this field empty.</em>
 									</p>
 									
-									<div class="g-recaptcha" style="margin-bottom: 20px;" data-sitekey="6LfendESAAAAAN1stiEC5LgfvCWi-Otl2T1KdddW"></div>
+									<?php $sitekey = get_field('recaptcha_site_key','options'); ?>
+									<?php if ($sitekey) : ?><div class="g-recaptcha" style="margin-bottom: 20px;" data-sitekey="<?php echo $sitekey; ?>"></div><?php endif; ?>
 
 									<p class="login-remember"><label><input name="rememberme" type="checkbox" id="rememberme" value="forever"> Remember Me</label></p>
 									<p class="submit">
